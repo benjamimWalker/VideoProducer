@@ -92,4 +92,3 @@ def enquadrar(image_path):
     os.remove(image_path + 'resized.jpg')
     os.remove(image_path + 'Maior.jpg')
 
-
