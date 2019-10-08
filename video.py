@@ -18,9 +18,13 @@ except ModuleNotFoundError:
 import os
 import webbrowser
 try:
-    from Production.gettags import get_tags
+    from Production.gettags import tratafrase
 except ModuleNotFoundError:
-    exec('from gettags import get_tags')
+    exec('from gettags import tratafrase')
+try:
+    from Production.testis import upload
+except:
+    exec('from testis import upload')
 
 
 descricao = ''
@@ -187,7 +191,7 @@ for filename in images:
     print(size)
     img_array.append(img)
 
-out = cv2.VideoWriter('project.avi', cv2.VideoWriter_fourcc(*'DIVX'), uniform(0.11, 0.21), (3480, 2160))
+out = cv2.VideoWriter('project.avi', cv2.VideoWriter_fourcc(*'DIVX'), uniform(0.13, 0.19), (3480, 2160))
 for i in range(len(img_array)):
     out.write(img_array[i])
 
@@ -197,23 +201,24 @@ out.write(img)
 out.release()
 
 os.rename('project.avi', f'{oq.title()}.mp4')
-# shutil.copy(f'{oq}.mp4', f'{oq}.mp4'+'1.mp4')
+shutil.copy(f'{oq.title()}.mp4', f'{oq.title()}.mp4'+'1.mp4')
 
 for items in lista:
     descricao += items + '\n'
 
+
 add_song(f'{oq.title()}.mp4', choice(sounds))
-#add_voice(f'{oq}.mp4', descricao)
-# add_song(f'{oq}.mp4' + '1.mp4', pega_audio(f'{oq}.mp4'))
-# os.remove(f'{oq}.mp4')
-# os.remove(f'{oq}.mp4' + '.mp3')
-# os.rename(f'{oq}.mp4' + '1.mp4', f'{oq}.mp4')
+add_voice(f'{oq.title()}.mp4', descricao)
+add_song(f'{oq.title()}.mp4' + '1.mp4', pega_audio(f'{oq.title()}.mp4'))
+os.remove(f'{oq.title()}.mp4')
+os.remove(f'{oq.title()}.mp4' + '.mp3')
+os.rename(f'{oq.title()}.mp4' + '1.mp4', f'{oq.title()}.mp4')
+
+descricao += 'Royalty Free Music from Bensound'
 
 for image in images:
     os.remove(image)
 
-print('\n' + '-' * 20 + '\n')
-print(f'DESCRIÇAO:\n\033[34mHey there!\nHere is my script: {descricao}\n')
-print('\n' + '_' * 20 + '\n')
-webbrowser.open('https://www.youtube.com/upload')
-get_tags(oq)
+
+
+upload(f'{oq.title()}.mp4', 'Who is '+ oq.title() +'?', f'Hey there!\nHere is my script: {descricao}\n', tratafrase(oq))
