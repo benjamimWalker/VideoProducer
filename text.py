@@ -41,10 +41,3 @@ def text_wiki(term, complement=''):
         return info[0:8]
     raise Exception(f'Foram encontrados somente {len(info)} paragrafos sobre: {term}')
     
-    
-    
-    
-    
-    
-    
-    
